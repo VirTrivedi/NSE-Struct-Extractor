@@ -1,0 +1,509 @@
+struct MESSAGE_HEADER {
+    int16_t TransactionCode;
+    int32_t LogTime;
+    char AlphaChar[2];
+    int32_t TraderId;
+    int16_t ErrorCode;
+    int64_t Timestamp;
+    char TimeStamp1[8];
+    char TimeStamp2[8];
+    int16_t MessageLength;
+};
+
+struct ST_BROKER_ELIGIBILITY_PER_MKT_SMALL_ENDIAN {
+    uint8_t Reserved : 4;
+    uint8_t AuctionMarket : 1;
+    uint8_t SpotMarket : 1;
+    uint8_t OddlotMarket : 1;
+    uint8_t NormalMarket : 1;
+    uint8_t Reserved2 : 8;
+};
+
+struct ST_BROKER_ELIGIBILITY_PER_MKT_BIG_ENDIAN {
+    uint8_t NormalMarket : 1;
+    uint8_t OddlotMarket : 1;
+    uint8_t SpotMarket : 1;
+    uint8_t AuctionMarket : 1;
+    uint8_t Reserved : 4;
+    uint8_t Reserved2 : 8;
+};
+
+struct MS_SIGNON_REQUEST_IN {
+    MESSAGE_HEADER Header;
+    int32_t UserID;
+    char Reserved[8];
+    char Password[8];
+    char Reserved[8];
+    char NewPassword[8];
+    char TraderName[26];
+    int32_t LastPasswordChangeDate;
+    char BrokerID[5];
+    char Reserved[1];
+    int16_t BranchID;
+    int32_t VersionNumber;
+    int32_t Batch2StartTime;
+    char HostSwitchContext[1];
+    char Colour[50];
+    char Reserved[1];
+    int16_t UserType;
+    double SequenceNumber;
+    char WsClassName[14];
+    char BrokerStatus[1];
+    char ShowIndex[1];
+    ST_BROKER_ELIGIBILITY_PER_MKT_SMALL_ENDIAN BrokerEligibilityPerMarket;
+    int16_t MemberType;
+    char ClearingStatus[1];
+    char BrokerName[25];
+    char Reserved[16];
+    char Reserved[16];
+    char Reserved[16];
+};
+
+struct MS_SYSTEM_INFO_REQ {
+    MESSAGE_HEADER Header;
+    int32_t LastUpdatePortfolioTime;
+};
+
+struct ST_MARKET_STATUS {
+    int16_t Normal;
+    int16_t Oddlot;
+    int16_t Spot;
+    int16_t Auction;
+};
+
+struct ST_EX_MARKET_STATUS {
+    int16_t Normal;
+    int16_t Oddlot;
+    int16_t Spot;
+    int16_t Auction;
+};
+
+struct ST_PL_MARKET_STATUS {
+    int16_t Normal;
+    int16_t Oddlot;
+    int16_t Spot;
+    int16_t Auction;
+};
+
+struct MS_UPDATE_LOCAL_DATABASE {
+    MESSAGE_HEADER Header;
+    int32_t LastUpdateSecurityTime;
+    int32_t LastUpdateParticipantTime;
+    int32_t LastUpdateInstrumentTime;
+    int32_t LastUpdateIndexTime;
+    char RequestForOpenOrders;
+    char Reserved;
+    ST_MARKET_STATUS MarketStatus;
+    ST_EX_MARKET_STATUS ExMarketStatus;
+    ST_PL_MARKET_STATUS PlMarketStatus;
+};
+
+struct EXCH_PORTFOLIO_REQ {
+    MESSAGE_HEADER Header;
+    int32_t LastUpdateDtTime;
+};
+
+struct MS_MESSAGE_DOWNLOAD {
+    MESSAGE_HEADER Header;
+    double SequenceNumber;
+};
+
+struct CONTRACT_DESC {
+    char InstrumentName[6];
+    char Symbol[10];
+    int32_t ExpiryDate;
+    int32_t StrikePrice;
+    char OptionType[2];
+    int16_t CALevel;
+};
+
+struct ST_ORDER_FLAGS_SMALL_ENDIAN {
+    uint8_t AON : 1;
+    uint8_t IOC : 1;
+    uint8_t GTC : 1;
+    uint8_t Day : 1;
+    uint8_t MIT : 1;
+    uint8_t SL : 1;
+    uint8_t Market : 1;
+    uint8_t ATO : 1;
+    uint8_t Reserved : 3;
+    uint8_t Frozen : 1;
+    uint8_t Modified : 1;
+    uint8_t Traded : 1;
+    uint8_t MatchedInd : 1;
+    uint8_t MF : 1;
+};
+
+struct ST_ORDER_FLAGS_BIG_ENDIAN {
+    uint8_t ATO : 1;
+    uint8_t Market : 1;
+    uint8_t SL : 1;
+    uint8_t MIT : 1;
+    uint8_t Day : 1;
+    uint8_t GTC : 1;
+    uint8_t IOC : 1;
+    uint8_t AON : 1;
+    uint8_t MF : 1;
+    uint8_t MatchedInd : 1;
+    uint8_t Traded : 1;
+    uint8_t Modified : 1;
+    uint8_t Frozen : 1;
+    uint8_t Reserved : 3;
+};
+
+struct ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN {
+    uint8_t BOC : 1;
+    uint8_t COL : 1;
+    uint8_t Reserved : 1;
+    uint8_t Reserved2 : 1;
+    uint8_t STPC : 1;
+    uint8_t Reserved3 : 3;
+};
+
+struct ADDITIONAL_ORDER_FLAGS_BIG_ENDIAN {
+    uint8_t Reserved : 3;
+    uint8_t STPC : 1;
+    uint8_t Reserved2 : 1;
+    uint8_t Reserved3 : 1;
+    uint8_t COL : 1;
+    uint8_t BOC : 1;
+};
+
+struct MS_OE_REQUEST {
+    MESSAGE_HEADER Header;
+    char ParticipantType;
+    char Reserved;
+    int16_t CompetitorPeriod;
+    int16_t SolicitorPeriod;
+    char ModifiedCancelledBy;
+    char Reserved2;
+    int16_t ReasonCode;
+    char Reserved3[4];
+    int32_t TokenNo;
+    CONTRACT_DESC ContractDesc;
+    char CounterPartyBrokerId[5];
+    char Reserved4;
+    char Reserved5[2];
+    char CloseoutFlag;
+    char Reserved6;
+    int16_t OrderType;
+    double OrderNumber;
+    char AccountNumber[10];
+    int16_t BookType;
+    int16_t BuySellIndicator;
+    int32_t DisclosedVolume;
+    int32_t DisclosedVolumeRemaining;
+    int32_t TotalVolumeRemaining;
+    int32_t Volume;
+    int32_t VolumeFilledToday;
+    int32_t Price;
+    int32_t TriggerPrice;
+    int32_t GoodTillDate;
+    int32_t EntryDateTime;
+    int32_t MinimumFillAONVolume;
+    int32_t LastModified;
+    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
+    int16_t BranchId;
+    int32_t TraderId;
+    char BrokerId[5];
+    char cOrdFiller[24];
+    char OpenClose;
+    char Settlor[12];
+    int16_t ProClientIndicator;
+    int16_t SettlementPeriod;
+    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
+    char Reserved7;
+    char Filler17;
+    char Filler18;
+    double NnField;
+    int64_t MktReplay;
+    char PAN[10];
+    int32_t AlgoID;
+    int16_t Reserved8;
+    int64_t LastActivityReference;
+    char Reserved9[52];
+};
+
+struct PRICE_MOD {
+    MESSAGE_HEADER Header;
+    int32_t TokenNo;
+    int32_t TraderID;
+    double OrderNumber;
+    int16_t BuySell;
+    int32_t Price;
+    int32_t Volume;
+    int32_t LastModified;
+    char Reference[4];
+    int64_t LastActivityReference;
+    char Reserved[24];
+};
+
+struct MS_TRADE_INQ_DATA {
+    MESSAGE_HEADER Header;
+    int32_t TokenNo;
+    CONTRACT_DESC ContractDesc;
+    int32_t FillNumber;
+    int32_t FillQuantity;
+    int32_t FillPrice;
+    char MktType;
+    char BuyOpenClose;
+    int32_t Reserved;
+    char BuyBrokerId[5];
+    char SellBrokerId[5];
+    int32_t TraderId;
+    char RequestedBy;
+    char SellOpenClose;
+    char BuyAccountNumber[10];
+    char SellAccountNumber[10];
+    char Reserved[24];
+    char ReservedFiller[2];
+    char Reserved[2];
+    char BuyPAN[10];
+    char SellPAN[10];
+    char Reserved[60];
+};
+
+struct MS_SPD_LEG_INFO {
+    int32_t Token2;
+    CONTRACT_DESC ContractDesc;
+    char OpBrokerId2[5];
+    char Fillerx2[1];
+    int16_t OrderType2;
+    int16_t BuySell2;
+    int32_t DisclosedVol2;
+    int32_t DisclosedVolRemaining2;
+    int32_t TotalVolRemaining2;
+    int32_t Volume2;
+    int32_t VolumeFilledToday2;
+    int32_t Price2;
+    int32_t TriggerPrice2;
+    int32_t MinFillAon2;
+    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
+    char OpenClose2[1];
+    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
+    char Reserved[1];
+    char FillerY[1];
+};
+
+struct MS_SPD_OE_REQUEST {
+    MESSAGE_HEADER Header;
+    char ParticipantType1;
+    char Filler1;
+    int16_t CompetitorPeriod1;
+    int16_t SolicitorPeriod1;
+    char ModCxBy1;
+    char Filler9;
+    int16_t ReasonCode1;
+    char StartAlpha1[2];
+    char EndAlpha1[2];
+    int32_t Token1;
+    CONTRACT_DESC ContractDesc;
+    char OpBrokerId1[5];
+    char Fillerx1;
+    char FillerOptions1[3];
+    char Filler1_2;
+    int16_t OrderType1;
+    double OrderNumber1;
+    char AccountNumber1[10];
+    int16_t BookType1;
+    int16_t BuySell1;
+    int32_t DisclosedVol1;
+    int32_t DisclosedVolRemaining1;
+    int32_t TotalVolRemaining1;
+    int32_t Volume1;
+    int32_t VolumeFilledToday1;
+    int32_t Price1;
+    int32_t TriggerPrice1;
+    int32_t GoodTillDate1;
+    int32_t EntryDateTime1;
+    int32_t MinFillAon1;
+    int32_t LastModified1;
+    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
+    int16_t BranchId1;
+    int32_t TraderId1;
+    char BrokerId1[5];
+    char cOrdFiller[24];
+    char OpenClose1;
+    char Settlor1[12];
+    int16_t ProClient1;
+    int16_t SettlementPeriod1;
+    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
+    char Reserved;
+    char Filler17;
+    char Filler18;
+    double NnField;
+    int64_t MktReplay;
+    char PAN[10];
+    int32_t AlgoID;
+    int16_t Reserved_2;
+    int64_t LastActivityReference;
+    char Reserved_3[52];
+    int32_t PriceDiff;
+    MS_SPD_LEG_INFO MS_SPD_LEG_INFO_leg2;
+    MS_SPD_LEG_INFO MS_SPD_LEG_INFO_leg3;
+};
+
+struct MS_GR_REQUEST {
+    MESSAGE_HEADER Header;
+    int16_t BoxID;
+    char BrokerID[5];
+    char Filler[1];
+};
+
+struct MS_SECURE_BOX_REGISTRATION_REQUEST_IN {
+    MESSAGE_HEADER Header;
+    int16_t BoxId;
+};
+
+struct MS_BOX_SIGN_ON_REQUEST_IN {
+    MESSAGE_HEADER Header;
+    int16_t BoxId;
+    char BrokerId[5];
+    char Reserved[5];
+    char SessionKey[8];
+};
+
+struct MS_BOX_SIGN_OFF {
+    MESSAGE_HEADER Header;
+    int16_t BoxId;
+};
+
+struct BRANCH_LIMITS {
+    double BranchBuyValueLimit;
+    double BranchSellValueLimit;
+    char Reserved[16];
+};
+
+struct BRANCH_ORD_VAL_LIMIT_UPDATE_REQ {
+    MESSAGE_HEADER Header;
+    char BrokerId[5];
+    char Reserved[25];
+    int16_t BranchId;
+    BRANCH_LIMITS BranchLimits;
+};
+
+struct USER_LIMITS {
+    char Reserved[32];
+    double UserOrderBuyValueLimit;
+    double UserOrderSellValueLimit;
+    char Reserved[16];
+};
+
+struct USER_ORD_VAL_LIMIT_UPDATE_REQ {
+    MESSAGE_HEADER Header;
+    char BrokerId[5];
+    char Reserved;
+    int16_t BranchId;
+    char Reserved[26];
+    int32_t UserId;
+    char Reserved[2];
+    USER_LIMITS UserLimits;
+};
+
+struct NORMAL_ORD_LIMIT_UPDATE_REQ {
+    MESSAGE_HEADER Header;
+    char BrokerId[5];
+    char Reserved[1];
+    int32_t UserId;
+    double OrderQtyLimit;
+    double OrderValLimit;
+};
+
+struct RESET_USER_PASSWORD_IN_FO {
+    MESSAGE_HEADER Header;
+    int32_t Userid;
+    char Reserved[14];
+};
+
+struct COL_USER_STATUS_CHANGE_REQ {
+    MESSAGE_HEADER Header;
+    int32_t Userid;
+    char ColUserBit;
+    char Reserved[7];
+};
+
+struct USER_TRD_MOD_CXL_STATUS_CHG_REQ {
+    MESSAGE_HEADER Header;
+    int32_t Userid;
+    char TrdModCxlBit;
+    char Reserved[7];
+};
+
+struct USER_ADDR_UNLOCK_REQ_FO {
+    MESSAGE_HEADER Header;
+    int32_t Userid;
+    char Reserved[70];
+};
+
+struct CONTRACT_DESC_TR {
+    char InstrumentName[6];
+    char Symbol[10];
+    int32_t ExpiryDate;
+    int32_t StrikePrice;
+    char OptionType[2];
+};
+
+struct MS_OE_REQUEST_TR {
+    int16_t TransactionCode;
+    int32_t UserID;
+    int16_t ReasonCode;
+    int32_t TokenNo;
+    CONTRACT_DESC_TR ContractDesc;
+    char AccountNumber[10];
+    int16_t BookType;
+    int16_t BuySellIndicator;
+    int32_t DisclosedVolume;
+    int32_t Volume;
+    int32_t Price;
+    int32_t GoodTillDate;
+    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
+    int16_t BranchId;
+    int32_t TraderId;
+    char BrokerId[5];
+    char OpenClose;
+    char Settlor[12];
+    int16_t ProClientIndicator;
+    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
+    int32_t Filler;
+    double NnField;
+    char PAN[10];
+    int32_t AlgoID;
+    int16_t Reserved1;
+    char Reserved2[32];
+};
+
+struct MS_OM_REQUEST_TR {
+    int16_t TransactionCode;
+    int32_t UserID;
+    char ModifiedCancelledBy;
+    int32_t TokenNo;
+    CONTRACT_DESC_TR ContractDesc;
+    double OrderNumber;
+    char AccountNumber[10];
+    int16_t BookType;
+    int16_t BuySellIndicator;
+    int32_t DisclosedVolume;
+    int32_t DisclosedVolumeRemaining;
+    int32_t TotalVolumeRemaining;
+    int32_t Volume;
+    int32_t VolumeFilledToday;
+    int32_t Price;
+    int32_t GoodTillDate;
+    int32_t EntryDateTime;
+    int32_t LastModified;
+    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
+    int16_t BranchId;
+    int32_t TraderId;
+    char BrokerId[5];
+    char OpenClose;
+    char Settlor[12];
+    int16_t ProClientIndicator;
+    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
+    int32_t Filler;
+    double NnField;
+    char PAN[10];
+    int32_t AlgoID;
+    int16_t Reserved;
+    int64_t LastActivityReference;
+    char Reserved2[24];
+};

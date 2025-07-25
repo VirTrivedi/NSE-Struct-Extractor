@@ -10,7 +10,6 @@ struct MESSAGE_HEADER {
     int16_t MessageLength;
 };
 
-
 struct INNER_MESSAGE_HEADER {
     int32_t TraderId;
     int32_t LogTime;
@@ -19,7 +18,6 @@ struct INNER_MESSAGE_HEADER {
     int16_t ErrorCode;
     int64_t Timestamp;
 };
-
 
 struct BCAST_HEADER {
     char Reserved[2];
@@ -35,13 +33,11 @@ struct BCAST_HEADER {
     int16_t MessageLength;
 };
 
-
 struct MS_ERROR_RESPONSE {
     MESSAGE_HEADER Header;
     char Key[14];
     char ErrorMessage[128];
 };
-
 
 struct ST_BROKER_ELIGIBILITY_PER_MKT_SMALL_ENDIAN {
     uint8_t Reserved : 4;
@@ -52,7 +48,6 @@ struct ST_BROKER_ELIGIBILITY_PER_MKT_SMALL_ENDIAN {
     uint8_t Reserved2 : 8;
 };
 
-
 struct ST_BROKER_ELIGIBILITY_PER_MKT_BIG_ENDIAN {
     uint8_t NormalMarket : 1;
     uint8_t OddlotMarket : 1;
@@ -61,39 +56,6 @@ struct ST_BROKER_ELIGIBILITY_PER_MKT_BIG_ENDIAN {
     uint8_t Reserved : 4;
     uint8_t Reserved2 : 8;
 };
-
-
-struct MS_SIGNON_REQUEST_IN {
-    MESSAGE_HEADER Header;
-    int32_t UserID;
-    char Reserved[8];
-    char Password[8];
-    char Reserved[8];
-    char NewPassword[8];
-    char TraderName[26];
-    int32_t LastPasswordChangeDate;
-    char BrokerID[5];
-    char Reserved[1];
-    int16_t BranchID;
-    int32_t VersionNumber;
-    int32_t Batch2StartTime;
-    char HostSwitchContext[1];
-    char Colour[50];
-    char Reserved[1];
-    int16_t UserType;
-    double SequenceNumber;
-    char WsClassName[14];
-    char BrokerStatus[1];
-    char ShowIndex[1];
-    ST_BROKER_ELIGIBILITY_PER_MKT_SMALL_ENDIAN BrokerEligibilityPerMarket;
-    int16_t MemberType;
-    char ClearingStatus[1];
-    char BrokerName[25];
-    char Reserved[16];
-    char Reserved[16];
-    char Reserved[16];
-};
-
 
 struct MS_SIGNON_REQUEST_OUT {
     MESSAGE_HEADER Header;
@@ -126,20 +88,12 @@ struct MS_SIGNON_REQUEST_OUT {
     char Reserved[16];
 };
 
-
-struct MS_SYSTEM_INFO_REQ {
-    MESSAGE_HEADER Header;
-    int32_t LastUpdatePortfolioTime;
-};
-
-
 struct ST_MARKET_STATUS {
     int16_t Normal;
     int16_t Oddlot;
     int16_t Spot;
     int16_t Auction;
 };
-
 
 struct ST_EX_MARKET_STATUS {
     int16_t Normal;
@@ -148,14 +102,12 @@ struct ST_EX_MARKET_STATUS {
     int16_t Auction;
 };
 
-
 struct ST_PL_MARKET_STATUS {
     int16_t Normal;
     int16_t Oddlot;
     int16_t Spot;
     int16_t Auction;
 };
-
 
 struct ST_STOCK_ELIGIBLE_INDICATORS_SMALL_ENDIAN {
     uint8_t Reserved : 5;
@@ -199,26 +151,10 @@ struct MS_SYSTEM_INFO_DATA {
     int32_t RiskFreeInterestRate;
 };
 
-
-struct MS_UPDATE_LOCAL_DATABASE {
-    MESSAGE_HEADER Header;
-    int32_t LastUpdateSecurityTime;
-    int32_t LastUpdateParticipantTime;
-    int32_t LastUpdateInstrumentTime;
-    int32_t LastUpdateIndexTime;
-    char RequestForOpenOrders;
-    char Reserved;
-    ST_MARKET_STATUS MarketStatus;
-    ST_EX_MARKET_STATUS ExMarketStatus;
-    ST_PL_MARKET_STATUS PlMarketStatus;
-};
-
-
 struct UPDATE_LDB_HEADER {
     MESSAGE_HEADER Header;
     char Reserved[2];
 };
-
 
 struct UPDATE_LDB_DATA {
     MESSAGE_HEADER Header;
@@ -232,13 +168,11 @@ struct DOWNLOAD_INDEX_DETAILS {
     int32_t LastUpdateDateTime;
 };
 
-
 struct MS_DOWNLOAD_INDEX {
     MESSAGE_HEADER Header;
     int16_t NoOfRecords;
     DOWNLOAD_INDEX_DETAILS IndexDetails[17];
 };
-
 
 struct BCAST_INDEX_MAP_DETAILS {
     char BcastName[26];
@@ -247,25 +181,16 @@ struct BCAST_INDEX_MAP_DETAILS {
     int32_t LastUpdateDateTime;
 };
 
-
 struct MS_DOWNLOAD_INDEX_MAP {
     MESSAGE_HEADER Header;
     int16_t NoOfRecords;
     BCAST_INDEX_MAP_DETAILS BCASTIndexMapDetails[10];
 };
 
-
 struct UPDATE_LOCAL_DB_TRAILER {
     MESSAGE_HEADER Header;
     char Reserved[2];
 };
-
-
-struct EXCH_PORTFOLIO_REQ {
-    MESSAGE_HEADER Header;
-    int32_t LastUpdateDtTime;
-};
-
 
 struct PORTFOLIO_DATA {
     char Portfolio[10];
@@ -273,7 +198,6 @@ struct PORTFOLIO_DATA {
     int32_t LastUpdateDtTime;
     char DeleteFlag;
 };
-
 
 struct EXCH_PORTFOLIO_RESP {
     MESSAGE_HEADER Header;
@@ -283,19 +207,11 @@ struct EXCH_PORTFOLIO_RESP {
     PORTFOLIO_DATA PortfolioData;
 };
 
-
-struct MS_MESSAGE_DOWNLOAD {
-    MESSAGE_HEADER Header;
-    double SequenceNumber;
-};
-
-
 struct SIGNOFF_OUT {
     MESSAGE_HEADER Header;
     int32_t UserId;
     char Reserved[145];
 };
-
 
 struct CONTRACT_DESC {
     char InstrumentName[6];
@@ -305,7 +221,6 @@ struct CONTRACT_DESC {
     char OptionType[2];
     int16_t CALevel;
 };
-
 
 struct ST_ORDER_FLAGS_SMALL_ENDIAN {
     uint8_t AON : 1;
@@ -324,7 +239,6 @@ struct ST_ORDER_FLAGS_SMALL_ENDIAN {
     uint8_t MF : 1;
 };
 
-
 struct ST_ORDER_FLAGS_BIG_ENDIAN {
     uint8_t ATO : 1;
     uint8_t Market : 1;
@@ -342,7 +256,6 @@ struct ST_ORDER_FLAGS_BIG_ENDIAN {
     uint8_t Reserved : 3;
 };
 
-
 struct ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN {
     uint8_t BOC : 1;
     uint8_t COL : 1;
@@ -352,7 +265,6 @@ struct ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN {
     uint8_t Reserved3 : 3;
 };
 
-
 struct ADDITIONAL_ORDER_FLAGS_BIG_ENDIAN {
     uint8_t Reserved : 3;
     uint8_t STPC : 1;
@@ -361,7 +273,6 @@ struct ADDITIONAL_ORDER_FLAGS_BIG_ENDIAN {
     uint8_t COL : 1;
     uint8_t BOC : 1;
 };
-
 
 struct MS_OE_REQUEST {
     MESSAGE_HEADER Header;
@@ -418,22 +329,6 @@ struct MS_OE_REQUEST {
     char Reserved9[52];
 };
 
-
-struct PRICE_MOD {
-    MESSAGE_HEADER Header;
-    int32_t TokenNo;
-    int32_t TraderID;
-    double OrderNumber;
-    int16_t BuySell;
-    int32_t Price;
-    int32_t Volume;
-    int32_t LastModified;
-    char Reference[4];
-    int64_t LastActivityReference;
-    char Reserved[24];
-};
-
-
 struct MS_TRADE_INQ_DATA {
     MESSAGE_HEADER Header;
     int32_t TokenNo;
@@ -459,7 +354,6 @@ struct MS_TRADE_INQ_DATA {
     char Reserved[60];
 };
 
-
 struct MS_SPD_LEG_INFO {
     int32_t Token2;
     CONTRACT_DESC ContractDesc;
@@ -481,7 +375,6 @@ struct MS_SPD_LEG_INFO {
     char Reserved[1];
     char FillerY[1];
 };
-
 
 struct MS_SPD_OE_REQUEST {
     MESSAGE_HEADER Header;
@@ -541,7 +434,6 @@ struct MS_SPD_OE_REQUEST {
     MS_SPD_LEG_INFO MS_SPD_LEG_INFO_leg3;
 };
 
-
 struct SEC_INFO {
     char InstrumentName[6];
     char Symbol[10];
@@ -552,12 +444,10 @@ struct SEC_INFO {
     int16_t CALevel;
 };
 
-
 struct ST_SPD_ELIGIBILITY {
     uint8_t Reserved : 7;
     uint8_t Eligibility : 1;
 };
-
 
 struct MS_SPD_UPDATE_INFO {
     MESSAGE_HEADER Header;
@@ -575,7 +465,6 @@ struct MS_SPD_UPDATE_INFO {
     char DeleteFlag;
     char Reserved;
 };
-
 
 struct MS_TRADE_CONFIRM {
     MESSAGE_HEADER Header;
@@ -621,7 +510,6 @@ struct MS_TRADE_CONFIRM {
     char Reserved5[52];
 };
 
-
 struct INSTRUMENT_USER {
     double BranchBuyValueLimit;
     double BranchSellValueLimit;
@@ -633,7 +521,6 @@ struct INSTRUMENT_USER {
     double UserOrderUsedSellValueLimit;
 };
 
-
 struct MS_ORDER_VAL_LIMIT_DATA {
     MESSAGE_HEADER Header;
     char BrokerId[5];
@@ -644,7 +531,6 @@ struct MS_ORDER_VAL_LIMIT_DATA {
     INSTRUMENT_USER InstrumentUser;
 };
 
-
 struct DEALER_ORD_LMT {
     MESSAGE_HEADER Header;
     char BrokerId[5];
@@ -653,7 +539,6 @@ struct DEALER_ORD_LMT {
     double OrdValBuff;
 };
 
-
 struct SPD_ORD_LMT {
     MESSAGE_HEADER Header;
     char BrokerId[5];
@@ -661,7 +546,6 @@ struct SPD_ORD_LMT {
     double SpdOrdQtyBuff;
     double SpdOrdValBuff;
 };
-
 
 struct MS_TRADER_INT_MSG {
     MESSAGE_HEADER Header;
@@ -672,7 +556,6 @@ struct MS_TRADER_INT_MSG {
     char BroadCastMessage[239];
 };
 
-
 struct ST_BCAST_DESTINATION_SMALL_ENDIAN {
     uint8_t Reserved : 4;
     uint8_t JournalingRequired : 1;
@@ -682,7 +565,6 @@ struct ST_BCAST_DESTINATION_SMALL_ENDIAN {
     char Reserved2;
 };
 
-
 struct ST_BCAST_DESTINATION_BIG_ENDIAN {
     uint8_t TraderWorkstation : 1;
     uint8_t ControlWorkstation : 1;
@@ -691,7 +573,6 @@ struct ST_BCAST_DESTINATION_BIG_ENDIAN {
     uint8_t Reserved : 4;
     char Reserved2;
 };
-
 
 struct MS_BCAST_MESSAGE {
     BCAST_HEADER Header;
@@ -704,7 +585,6 @@ struct MS_BCAST_MESSAGE {
     char BroadcastMessage[239];
 };
 
-
 struct CTRL_MSG_TO_TRADER {
     MESSAGE_HEADER Header;
     int32_t TraderId;
@@ -713,7 +593,6 @@ struct CTRL_MSG_TO_TRADER {
     int16_t BroadCastMessageLength;
     char BroadCastMessage[239];
 };
-
 
 struct MS_RP_HDR_RPRT_MARKET_STATS_OUT_RPT {
     MESSAGE_HEADER Header;
@@ -725,7 +604,6 @@ struct MS_RP_HDR_RPRT_MARKET_STATS_OUT_RPT {
     int32_t TraderNumber;
     char TraderName[26];
 };
-
 
 struct MKT_STATS_DATA {
     CONTRACT_DESC ContractDesc;
@@ -742,7 +620,6 @@ struct MKT_STATS_DATA {
     char Indicator[4];
 };
 
-
 struct MS_RP_MARKET_STATS {
     MESSAGE_HEADER Header;
     char MessageType;
@@ -750,7 +627,6 @@ struct MS_RP_MARKET_STATS {
     int16_t NumberOfRecords;
     MKT_STATS_DATA MarketStatsData;
 };
-
 
 struct MKT_INDEX {
     int16_t Opening;
@@ -760,14 +636,12 @@ struct MKT_INDEX {
     int16_t Start;
 };
 
-
 struct MKT_IDX_RPT_DATA {
     MESSAGE_HEADER Header;
     char MessageType;
     char IndexName[15];
     MKT_INDEX Index;
 };
-
 
 struct INDUSTRY_INDEX {
     char IndustryName[15];
@@ -778,7 +652,6 @@ struct INDUSTRY_INDEX {
     int32_t Start;
 };
 
-
 struct IND_IDX_RPT_DATA {
     MESSAGE_HEADER Header;
     char MessageType;
@@ -787,12 +660,10 @@ struct IND_IDX_RPT_DATA {
     INDUSTRY_INDEX IndustryIndex;
 };
 
-
 struct INDEX_DATA {
     char SectorName[15];
     int32_t IndexValue;
 };
-
 
 struct SECT_IDX_RPT_DATA {
     MESSAGE_HEADER Header;
@@ -802,14 +673,12 @@ struct SECT_IDX_RPT_DATA {
     INDEX_DATA IndexData;
 };
 
-
 struct MS_RP_TRAILER_RPRT_MARKET_STATS_OUT_RPT {
     MESSAGE_HEADER Header;
     char MessageType;
     int32_t NumberOfPackets;
     char Reserved;
 };
-
 
 struct MS_RP_HDR_SPD_BC_JRNL_VCT_MSG {
     MESSAGE_HEADER Header;
@@ -822,7 +691,6 @@ struct MS_RP_HDR_SPD_BC_JRNL_VCT_MSG {
     int32_t TraderNumber;
     char TraderName[26];
 };
-
 
 struct SPD_STATS_DATA {
     int16_t MARKETTYPE;
@@ -845,7 +713,6 @@ struct SPD_STATS_DATA {
     int32_t NOOFCONTRACTSTRADED;
 };
 
-
 struct RP_SPD_MKT_STATS {
     MESSAGE_HEADER Header;
     char MessageType;
@@ -854,7 +721,6 @@ struct RP_SPD_MKT_STATS {
     SPD_STATS_DATA SPDStatsData;
 };
 
-
 struct MS_RP_TRAILER_SPD_BC_JRNL_VCT_MSG {
     MESSAGE_HEADER Header;
     char MessageType;
@@ -862,20 +728,17 @@ struct MS_RP_TRAILER_SPD_BC_JRNL_VCT_MSG {
     char Reserved;
 };
 
-
 struct ST_SEC_ELIGIBILITY_PER_MARKET_3_BYTES_SMALL_ENDIAN {
     uint8_t Reserved : 7;
     uint8_t Eligibility : 1;
     int16_t Status;
 };
 
-
 struct ST_SEC_ELIGIBILITY_PER_MARKET_3_BYTES_BIG_ENDIAN {
     uint8_t Eligibility : 1;
     uint8_t Reserved : 7;
     int16_t Status;
 };
-
 
 struct ST_ELIGIBILITY_INDICATORS_SMALL_ENDIAN {
     uint8_t Reserved : 5;
@@ -885,7 +748,6 @@ struct ST_ELIGIBILITY_INDICATORS_SMALL_ENDIAN {
     char Reserved2;
 };
 
-
 struct ST_ELIGIBILITY_INDICATORS_BIG_ENDIAN {
     uint8_t ParticipateInMarketIndex : 1;
     uint8_t AON : 1;
@@ -893,7 +755,6 @@ struct ST_ELIGIBILITY_INDICATORS_BIG_ENDIAN {
     uint8_t Reserved : 5;
     char Reserved2;
 };
-
 
 struct ST_PURPOSE_SMALL_ENDIAN {
     uint8_t ExerciseStyle : 1;
@@ -912,7 +773,6 @@ struct ST_PURPOSE_SMALL_ENDIAN {
     uint8_t ExAllowed : 1;
 };
 
-
 struct ST_PURPOSE_BIG_ENDIAN {
     uint8_t Dividend : 1;
     uint8_t Rights : 1;
@@ -929,7 +789,6 @@ struct ST_PURPOSE_BIG_ENDIAN {
     uint8_t IsCorporateAdjusted : 1;
     uint8_t Reserved2 : 3;
 };
-
 
 struct MS_SECURITY_UPDATE_INFO {
     BCAST_HEADER Header;
@@ -978,7 +837,6 @@ struct MS_SECURITY_UPDATE_INFO {
     int32_t BasePrice;
 };
 
-
 struct MS_INSTRUMENT_UPDATE_INFO {
     BCAST_HEADER Header;
     int16_t InstrumentId;
@@ -987,7 +845,6 @@ struct MS_INSTRUMENT_UPDATE_INFO {
     int32_t InstrumentUpdateTime;
     char DeleteFlag;
 };
-
 
 struct PARTICIPANT_UPDATE_INFO {
     BCAST_HEADER Header;
@@ -998,24 +855,20 @@ struct PARTICIPANT_UPDATE_INFO {
     char DeleteFlag;
 };
 
-
 struct ST_SEC_STATUS_PER_MARKET {
     int16_t Status;
 };
-
 
 struct TOKEN_AND_ELIGIBILITY {
     int32_t Token;
     ST_SEC_STATUS_PER_MARKET StatusPerMarket[4];
 };
 
-
 struct MS_SECURITY_STATUS_UPDATE_INFO {
     BCAST_HEADER Header;
     int16_t NumberOfRecords;
     TOKEN_AND_ELIGIBILITY TokenAndEligibility[35];
 };
-
 
 struct MS_BROADCAST_LIMIT_EXCEEDED {
     BCAST_HEADER Header;
@@ -1036,7 +889,6 @@ struct MS_BROADCAST_LIMIT_EXCEEDED {
     char Filler[1];
 };
 
-
 struct MS_BCAST_VCT_MSGS {
     BCAST_HEADER Header;
     int32_t Token;
@@ -1046,7 +898,6 @@ struct MS_BCAST_VCT_MSGS {
     int16_t BroadcastMessageLength;
     char BroadcastMessage[239];
 };
-
 
 struct ST_TICKER_INDEX_INFO {
     int32_t Token;
@@ -1058,13 +909,11 @@ struct ST_TICKER_INDEX_INFO {
     uint32_t DayLoOI;
 };
 
-
 struct MS_TICKER_TRADE_DATA {
     BCAST_HEADER Header;
     int16_t Number_of_Records;
     ST_TICKER_INDEX_INFO TickerIndexInfo;
 };
-
 
 struct ST_ENHNCD_TICKER_INDEX_INFO {
     int32_t Token;
@@ -1076,13 +925,11 @@ struct ST_ENHNCD_TICKER_INDEX_INFO {
     int64_t DayLoOi;
 };
 
-
 struct MS_ENHNCD_TICKER_TRADE_DATA {
     BCAST_HEADER Header;
     int16_t Number_of_Records;
     ST_ENHNCD_TICKER_INDEX_INFO EnhancdTickerIndexInfo;
 };
-
 
 struct ST_INTERACTIVE_MBO_DATA {
     int32_t Token;
@@ -1105,7 +952,6 @@ struct ST_INTERACTIVE_MBO_DATA {
     char RecordBuffer[180];
 };
 
-
 struct ST_INDICATOR_SMALL_ENDIAN {
     uint8_t Reserved : 4;
     uint8_t Sell : 1;
@@ -1115,7 +961,6 @@ struct ST_INDICATOR_SMALL_ENDIAN {
     char Reserved2;
 };
 
-
 struct ST_INDICATOR_BIG_ENDIAN {
     uint8_t LastTradeMore : 1;
     uint8_t LastTradeLess : 1;
@@ -1124,7 +969,6 @@ struct ST_INDICATOR_BIG_ENDIAN {
     uint8_t Reserved : 4;
     char Reserved2;
 };
-
 
 struct MS_BCAST_MBO_MBP {
     BCAST_HEADER Header;
@@ -1139,7 +983,6 @@ struct MS_BCAST_MBO_MBP {
     int32_t LowPrice;
 };
 
-
 struct ST_MBO_MBP_TERMS_SMALL_ENDIAN {
     uint8_t Reserved : 6;
     uint8_t AON : 1;
@@ -1147,14 +990,12 @@ struct ST_MBO_MBP_TERMS_SMALL_ENDIAN {
     char Reserved2;
 };
 
-
 struct ST_MBO_MBP_TERMS_BIG_ENDIAN {
     uint8_t MF : 1;
     uint8_t AON : 1;
     uint8_t Reserved : 6;
     char Reserved2;
 };
-
 
 struct ST_MBO_INFO {
     int32_t TraderId;
@@ -1164,13 +1005,11 @@ struct ST_MBO_INFO {
     int32_t MinFillQty;
 };
 
-
 struct ST_MBP_INFO {
     int32_t Qty;
     int32_t Price;
     int16_t NoOfOrders;
 };
-
 
 struct INTERACTIVE_ONLY_MBP_DATA {
     int32_t Token;
@@ -1202,13 +1041,11 @@ struct INTERACTIVE_ONLY_MBP_DATA {
     int32_t LowPrice;
 };
 
-
 struct MS_BCAST_ONLY_MBP {
     BCAST_HEADER Header;
     int16_t NoOfRecords;
     INTERACTIVE_ONLY_MBP_DATA InteractiveOnlyMBPData;
 };
-
 
 struct MBP_INFORMATION {
     int32_t Quantity;
@@ -1216,7 +1053,6 @@ struct MBP_INFORMATION {
     int16_t NumberOfOrders;
     int16_t BbBuySellFlag;
 };
-
 
 struct ST_MKT_WISE_INFO {
     ST_INDICATOR_SMALL_ENDIAN Indicator;
@@ -1228,13 +1064,11 @@ struct ST_MKT_WISE_INFO {
     int32_t LastTradeTime;
 };
 
-
 struct ST_MARKET_WATCH_BCAST {
     int32_t Token;
     ST_MKT_WISE_INFO MarketWiseInfo;
     uint32_t OpenInterest;
 };
-
 
 struct MS_BCAST_INQ_RESP_2 {
     BCAST_HEADER Header;
@@ -1242,20 +1076,17 @@ struct MS_BCAST_INQ_RESP_2 {
     ST_MARKET_WATCH_BCAST MarketWatchBCAST;
 };
 
-
 struct ST_ENHNCD_MARKET_WATCH_BCAST {
     int32_t Token;
     ST_MKT_WISE_INFO MarketWiseInfo;
     int64_t OpenInterest;
 };
 
-
 struct MS_ENHNCD_BCAST_INQ_RESP_2 {
     BCAST_HEADER Header;
     int16_t NoOfRecords;
     ST_ENHNCD_MARKET_WATCH_BCAST EnhancdMarketWatchBCAST;
 };
-
 
 struct MS_SEC_OPEN_MSGS {
     MESSAGE_HEADER Header;
@@ -1265,7 +1096,6 @@ struct MS_SEC_OPEN_MSGS {
     int32_t OpeningPrice;
     uint32_t Reserved;
 };
-
 
 struct MS_INDICES {
     char IndexName[21];
@@ -1284,26 +1114,22 @@ struct MS_INDICES {
     char Reserved;
 };
 
-
 struct MS_BCAST_INDICES {
     BCAST_HEADER Header;
     int16_t NumberOfRecords;
     MS_INDICES Indices;
 };
 
-
 struct INDUSTRY_INDICES {
     char IndustryName[15];
     int32_t IndexValue;
 };
-
 
 struct MS_BCAST_INDUSTRY_INDICES {
     BCAST_HEADER Header;
     int16_t NoOfRecs;
     INDUSTRY_INDICES Indices;
 };
-
 
 struct GI_INDEX_DETAILS {
     int32_t Token;
@@ -1321,12 +1147,10 @@ struct GI_INDEX_DETAILS {
     int32_t filler3;
 };
 
-
 struct MS_GLOBAL_INDICES {
     MESSAGE_HEADER Header;
     GI_INDEX_DETAILS IndexDetails;
 };
-
 
 struct CONTRACT_DETAILS {
     int32_t Token;
@@ -1356,12 +1180,10 @@ struct CONTRACT_DETAILS {
     int32_t filler3;
 };
 
-
 struct MS_GLOBAL_CONTRACTS {
     MESSAGE_HEADER Header;
     CONTRACT_DETAILS ContractDetails;
 };
-
 
 struct MbpBuys {
     int16_t NoOrders;
@@ -1369,19 +1191,16 @@ struct MbpBuys {
     int32_t Price;
 };
 
-
 struct MbpSells {
     int16_t NoOrders;
     int32_t Volume;
     int32_t Price;
 };
 
-
 struct TotalOrderVolume {
     double Buy;
     double Sell;
 };
-
 
 struct MS_SPD_MKT_INFO {
     BCAST_HEADER Header;
@@ -1402,12 +1221,10 @@ struct MS_SPD_MKT_INFO {
     int32_t LastUpdateTime;
 };
 
-
 struct OPEN_INTEREST {
     int32_t TokenNo;
     uint32_t CurrentOi;
 };
-
 
 struct CM_ASSET_OI {
     char Reserved1[2];
@@ -1423,12 +1240,10 @@ struct CM_ASSET_OI {
     OPEN_INTEREST OpenInterest;
 };
 
-
 struct ENHNCD_OPEN_INTEREST {
     int32_t TokenNo;
     int64_t CurrentOi;
 };
-
 
 struct ENHNCD_CM_ASSET_OI {
     char Reserved[2];
@@ -1444,33 +1259,21 @@ struct ENHNCD_CM_ASSET_OI {
     ENHNCD_OPEN_INTEREST EnhncdOpenInterest;
 };
 
-
 struct LIMIT_PRICE_PROTECTION_RANGE_DETAILS {
     int32_t TokenNumber;
     int32_t HighExecBand;
     int32_t LowExecBand;
 };
 
-
 struct LIMIT_PRICE_PROTECTION_RANGE_DATA {
     int32_t MsgCount;
     LIMIT_PRICE_PROTECTION_RANGE_DETAILS LimitPriceProtectionRangeDetails[25];
 };
 
-
 struct MS_BCAST_LIMIT_PRICE_PROTECTION_RANGE {
     BCAST_HEADER Header;
     LIMIT_PRICE_PROTECTION_RANGE_DATA LimitPriceProtectionRangeData;
 };
-
-
-struct MS_GR_REQUEST {
-    MESSAGE_HEADER Header;
-    int16_t BoxID;
-    char BrokerID[5];
-    char Filler[1];
-};
-
 
 struct MS_GR_RESPONSE_OLD {
     MESSAGE_HEADER Header;
@@ -1483,7 +1286,6 @@ struct MS_GR_RESPONSE_OLD {
     char CryptographicKey[32];
     char CryptographicIV[16];
 };
-
 
 struct MS_GR_RESPONSE_NEW {
     MESSAGE_HEADER Header;
@@ -1498,26 +1300,9 @@ struct MS_GR_RESPONSE_NEW {
     char CryptographicAdditionalKey[12];
 };
 
-
-struct MS_SECURE_BOX_REGISTRATION_REQUEST_IN {
-    MESSAGE_HEADER Header;
-    int16_t BoxId;
-};
-
-
 struct MS_SECURE_BOX_REGISTRATION_RESPONSE_OUT {
     MESSAGE_HEADER Header;
 };
-
-
-struct MS_BOX_SIGN_ON_REQUEST_IN {
-    MESSAGE_HEADER Header;
-    int16_t BoxId;
-    char BrokerId[5];
-    char Reserved[5];
-    char SessionKey[8];
-};
-
 
 struct MS_BOX_SIGN_ON_REQUEST_OUT {
     MESSAGE_HEADER Header;
@@ -1525,17 +1310,9 @@ struct MS_BOX_SIGN_ON_REQUEST_OUT {
     char Reserved[10];
 };
 
-
 struct HEARTBEAT {
     MESSAGE_HEADER Header;
 };
-
-
-struct MS_BOX_SIGN_OFF {
-    MESSAGE_HEADER Header;
-    int16_t BoxId;
-};
-
 
 struct MS_BCAST_CONT_MESSAGE {
     MESSAGE_HEADER Header;
@@ -1544,13 +1321,11 @@ struct MS_BCAST_CONT_MESSAGE {
     char Reserved[200];
 };
 
-
 struct BRANCH_LIMITS {
     double BranchBuyValueLimit;
     double BranchSellValueLimit;
     char Reserved[16];
 };
-
 
 struct BRANCH_ORD_VAL_LIMIT_UPDATE_REQ {
     MESSAGE_HEADER Header;
@@ -1560,14 +1335,12 @@ struct BRANCH_ORD_VAL_LIMIT_UPDATE_REQ {
     BRANCH_LIMITS BranchLimits;
 };
 
-
 struct USER_LIMITS {
     char Reserved[32];
     double UserOrderBuyValueLimit;
     double UserOrderSellValueLimit;
     char Reserved[16];
 };
-
 
 struct USER_ORD_VAL_LIMIT_UPDATE_REQ {
     MESSAGE_HEADER Header;
@@ -1580,7 +1353,6 @@ struct USER_ORD_VAL_LIMIT_UPDATE_REQ {
     USER_LIMITS UserLimits;
 };
 
-
 struct NORMAL_ORD_LIMIT_UPDATE_REQ {
     MESSAGE_HEADER Header;
     char BrokerId[5];
@@ -1590,21 +1362,11 @@ struct NORMAL_ORD_LIMIT_UPDATE_REQ {
     double OrderValLimit;
 };
 
-
 struct RESET_USER_PASSWORD_IN_FO {
     MESSAGE_HEADER Header;
     int32_t Userid;
     char Reserved[14];
 };
-
-
-struct COL_USER_STATUS_CHANGE_REQ {
-    MESSAGE_HEADER Header;
-    int32_t Userid;
-    char ColUserBit;
-    char Reserved[7];
-};
-
 
 struct COL_USER_STATUS_CHANGE_RESP {
     MESSAGE_HEADER Header;
@@ -1613,15 +1375,6 @@ struct COL_USER_STATUS_CHANGE_RESP {
     char Reserved;
 };
 
-
-struct USER_TRD_MOD_CXL_STATUS_CHG_REQ {
-    MESSAGE_HEADER Header;
-    int32_t Userid;
-    char TrdModCxlBit;
-    char Reserved[7];
-};
-
-
 struct USER_TRD_MOD_CXL_STATUS_CHG_RESP {
     MESSAGE_HEADER Header;
     int32_t Userid;
@@ -1629,27 +1382,17 @@ struct USER_TRD_MOD_CXL_STATUS_CHG_RESP {
     char Reserved;
 };
 
-
-struct USER_ADDR_UNLOCK_REQ_FO {
-    MESSAGE_HEADER Header;
-    int32_t Userid;
-    char Reserved[70];
-};
-
-
 struct USER_ADDR_UNLOCK_CONFIRM_FO {
     MESSAGE_HEADER Header;
     int32_t Userid;
     char Reserved[36];
 };
 
-
 struct USER_ADDR_UNLOCK_APPROVE_FO {
     MESSAGE_HEADER Header;
     int32_t UserId;
     char Reserved[36];
 };
-
 
 struct GIVEUP {
     double OrderNumber;
@@ -1675,13 +1418,11 @@ struct GIVEUP {
     char Deleted[1];
 };
 
-
 struct GIVEUP_RESPONSE {
     MESSAGE_HEADER Header;
     int16_t ReasonCode;
     GIVEUP Giveup;
 };
-
 
 struct MS_ACK_RESPONSE {
     int16_t TransactionCode;
@@ -1692,7 +1433,6 @@ struct MS_ACK_RESPONSE {
     int16_t MessageLength;
 };
 
-
 struct CONTRACT_FILE_HEADER {
     char NEATFO[6];
     char Reserved;
@@ -1700,14 +1440,12 @@ struct CONTRACT_FILE_HEADER {
     char Reserved;
 };
 
-
 struct ST_SEC_ELIGIBILITY_PER_MARKET_6_BYTES {
     int16_t SecurityStatus;
     char Reserved;
     char Eligibility;
     char Reserved[2];
 };
-
 
 struct STOCK_STRUCTURE {
     int32_t Token;
@@ -1824,14 +1562,12 @@ struct STOCK_STRUCTURE {
     char DeleteFlag;
 };
 
-
 struct PARTICIPANT_FILE_HEADER {
     char NSEFO[6];
     char Reserved;
     char VersionNumber[5];
     char Reserved[2];
 };
-
 
 struct PARTICIPANT_STRUCTURE {
     char ParticipantId[12];
@@ -1845,7 +1581,6 @@ struct PARTICIPANT_STRUCTURE {
     int32_t LastUpdateTime;
 };
 
-
 struct SECURITY_FILE_HEADER {
     char NEATCM[6];
     char Reserved;
@@ -1854,14 +1589,12 @@ struct SECURITY_FILE_HEADER {
     int32_t CreationTime;
 };
 
-
 struct ST_SEC_ELIGIBILITY_PER_MARKET_5_BYTES {
     int16_t SecurityStatus;
     char Reserved;
     char Eligibility;
     char Reserved;
 };
-
 
 struct SECURITY_STRUCTURE {
     int32_t Token;
@@ -1944,83 +1677,6 @@ struct SECURITY_STRUCTURE {
     char ISIN[12];
 };
 
-
-struct CONTRACT_DESC_TR {
-    char InstrumentName[6];
-    char Symbol[10];
-    int32_t ExpiryDate;
-    int32_t StrikePrice;
-    char OptionType[2];
-};
-
-
-struct MS_OE_REQUEST_TR {
-    int16_t TransactionCode;
-    int32_t UserID;
-    int16_t ReasonCode;
-    int32_t TokenNo;
-    CONTRACT_DESC_TR ContractDesc;
-    char AccountNumber[10];
-    int16_t BookType;
-    int16_t BuySellIndicator;
-    int32_t DisclosedVolume;
-    int32_t Volume;
-    int32_t Price;
-    int32_t GoodTillDate;
-    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
-    int16_t BranchId;
-    int32_t TraderId;
-    char BrokerId[5];
-    char OpenClose;
-    char Settlor[12];
-    int16_t ProClientIndicator;
-    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
-    int32_t Filler;
-    double NnField;
-    char PAN[10];
-    int32_t AlgoID;
-    int16_t Reserved1;
-    char Reserved2[32];
-};
-
-
-struct MS_OM_REQUEST_TR {
-    int16_t TransactionCode;
-    int32_t UserID;
-    char ModifiedCancelledBy;
-    int32_t TokenNo;
-    CONTRACT_DESC_TR ContractDesc;
-    double OrderNumber;
-    char AccountNumber[10];
-    int16_t BookType;
-    int16_t BuySellIndicator;
-    int32_t DisclosedVolume;
-    int32_t DisclosedVolumeRemaining;
-    int32_t TotalVolumeRemaining;
-    int32_t Volume;
-    int32_t VolumeFilledToday;
-    int32_t Price;
-    int32_t GoodTillDate;
-    int32_t EntryDateTime;
-    int32_t LastModified;
-    ST_ORDER_FLAGS_SMALL_ENDIAN OrderFlags;
-    int16_t BranchId;
-    int32_t TraderId;
-    char BrokerId[5];
-    char OpenClose;
-    char Settlor[12];
-    int16_t ProClientIndicator;
-    ADDITIONAL_ORDER_FLAGS_SMALL_ENDIAN AdditionalOrderFlags;
-    int32_t Filler;
-    double NnField;
-    char PAN[10];
-    int32_t AlgoID;
-    int16_t Reserved;
-    int64_t LastActivityReference;
-    char Reserved2[24];
-};
-
-
 struct MS_OE_RESPONSE_TR {
     int16_t TransactionCode;
     int32_t LogTime;
@@ -2063,7 +1719,6 @@ struct MS_OE_RESPONSE_TR {
     int64_t LastActivityReference;
     char Reserved[52];
 };
-
 
 struct MS_TRADE_CONFIRM_TR {
     int16_t TransactionCode;
